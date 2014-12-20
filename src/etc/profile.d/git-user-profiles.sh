@@ -46,3 +46,6 @@ then
         /bin/rm -f "${GUP_TMP_FILE}"
     fi
 fi
+# Simple alias to re-source this profile in an existing session regardless if
+# it's enabled on bash login or not.
+alias git-user-profiles-select='source /etc/profile.d/git-user-profiles.sh'
