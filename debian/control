@@ -1,0 +1,20 @@
+Source: git-user-profiles
+Section: unknown
+Priority: optional
+Maintainer: Kevin C. Krinke <kevin@krinke.ca>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.5
+Homepage: https://github.com/kckrinke/git-user-profiles
+#Vcs-Git: https://github.com/kckrinke/git-user-profiles.git
+#Vcs-Browser: https://github.com/kckrinke/git-user-profiles
+
+Package: git-user-profiles
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Manage multiple GIT user profiles
+ Helps to manage different GIT profiles on a per login
+ session (terminal).
+ .
+ Essentially allows one to use different combinations of
+ GIT_USER_NAME and GIT_USER_EMAIL in different terminal
+ sessions at the same time.

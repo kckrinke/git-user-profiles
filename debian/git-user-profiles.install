@@ -1,0 +1,3 @@
+src/usr/bin/git usr/bin/git
+src/usr/bin/git-user-profiles-admin usr/bin/git-user-profiles-admin
+src/etc/profile.d/git-user-profiles.sh etc/profile.d/git-user-profiles.sh

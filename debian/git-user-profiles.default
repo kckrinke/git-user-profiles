@@ -1,0 +1,5 @@
+# Set to 1 to prompt for git profile selection on bash login.
+ENABLE_ON_BASH_LOGIN=0
+
+# Global GIT Profiles Directory
+GIT_USER_PROFILES_PATH=/etc/git-user-profiles.d
