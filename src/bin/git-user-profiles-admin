@@ -9,7 +9,6 @@ use Getopt::Long;
 use Pod::Usage;
 use File::Basename;
 use File::Path;
-use Data::Dumper;
 
 my $opt_usage = false;
 my $opt_help = false;
@@ -23,11 +22,11 @@ pod2usage(0) if $opt_usage;
 pod2usage(-exitval => 0, -verbose => 2) if $opt_help;
 
 mkdir($opt_profile_path) unless -d $opt_profile_path;
-unless (-r $opt_profile_path) {
+unless (-w $opt_profile_path) {
     pod2usage
      ( -exitval => 0,
-       -verbose => 1,
-       -message => "Unable to read profile path: ".$opt_profile_path
+       -verbose => 0,
+       -message => "Insufficient privileges for: ".$opt_profile_path
      );
 }
 
