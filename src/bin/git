@@ -17,15 +17,20 @@ then
         export GIT_AUTHOR_EMAIL="${GUP_USER_EMAIL}"
         export GIT_COMMITTER_NAME="${GUP_USER_NAME}"
         export GIT_COMMITTER_EMAIL="${GUP_USER_EMAIL}"
-    else
-        echo "gup: Missing GIT User Profile." 1>&2
-        exit 1
+        # Actually call out to the real git binary
+        [ -n "$(which git.real)" ] && exec git.real "$@"
+        # If we got this far, git.real doesn't exist :|
+        echo "git-user-profiles: Missing git.real diversion." 1>&2
+        exit 254
     fi
-    # Actually call out to the real git binary
-    [ -n "$(which git.real)" ] && exec git.real "$@"
-    # If we got this far, git.real doesn't exist :|
-    echo "gup: Missing git.real diversion." 1>&2
-    exit 1
-else
-    exec git.real "$@"
+    echo "
+git-user-profiles: Profile environment is missing. Using existing GIT config.
+git-user-profiles: To disable this message, set ENABLE_ON_BASH_LOGIN=0 in the
+git-user-profiles: global defaults file: /etc/defaults/git-user-profiles
+git-user-profiles: or you can setup the current session's active profile by
+git-user-profiles: sourcing the file: /etc/profile.d/git-user-profiles.sh
+git-user-profiles: which will prompt you to select a profile as if you had
+git-user-profiles: started a new bash login session.
+" 1>&2
 fi
+exec git.real "$@"
