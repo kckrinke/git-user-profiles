@@ -10,7 +10,7 @@ Homepage: https://github.com/kckrinke/git-user-profiles
 
 Package: git-user-profiles
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, git
+Depends: ${shlibs:Depends}, ${misc:Depends}, git, perl, libui-dialog-perl, libfile-slurp-perl
 Description: Manage multiple GIT user profiles
  Helps to manage different GIT profiles on a per login
  session (terminal).
@@ -18,3 +18,13 @@ Description: Manage multiple GIT user profiles
  Essentially allows one to use different combinations of
  GIT_USER_NAME and GIT_USER_EMAIL in different terminal
  sessions at the same time.
+ .
+ This package contains an administrative script to add,
+ edit and remove GIT profiles: git-user-profiles-admin.
+ .
+ This package also contains a /etc/profile.d script which
+ prompts the user to select a GIT profile and then exports
+ the user name and email variables.
+ .
+ The /etc/profile.d script is disabled by default. Edit
+ the /etc/defaults/git-user-profiles file to enable.
