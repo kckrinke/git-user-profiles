@@ -1,3 +1,9 @@
+git-user-profiles (1.0.1) unstable; urgency=medium
+
+  * helpful alias to re-select the git user profiles for existing sessions
+
+ -- Kevin C. Krinke <kckrinke@knowroaming.com>  Sat, 20 Dec 2014 04:37:19 -0500
+
 git-user-profiles (1.0) unstable; urgency=low
 
   * Initial Release.
