@@ -16,7 +16,10 @@ set -e
 
 case "$1" in
     install|upgrade)
-        dpkg-divert --add --rename --divert /usr/bin/git.real /usr/bin/git
+        dpkg-divert \
+            --package git-user-profiles \
+            --add --rename --divert \
+            /usr/bin/git.real /usr/bin/git
     ;;
 
     abort-upgrade)
