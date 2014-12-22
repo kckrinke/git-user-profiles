@@ -1,0 +1,35 @@
+#!/bin/bash
+VERBOSE=0
+while [ $# -gt 0 ]
+do
+    case "$1" in
+        "-h"|"--help"|"-?")
+            echo "usage: $(basename $0) [-h|--help] [-v|--verbose]"
+            exit 1
+            ;;
+        "-v"|"--verbose")
+            VERBOSE=1
+            ;;
+    esac
+    shift
+done
+
+if [ -n "${GUP_ENV_EXISTS}" ]
+then
+    if [ $VERBOSE -eq 0 ]
+    then
+        if [ -n "${GUP_CURRENT}" ]
+        then
+            echo "[${GUP_CURRENT}] ${GUP_USER_NAME} <${GUP_USER_EMAIL}>"
+        else
+            echo "${GUP_USER_NAME} <${GUP_USER_EMAIL}>"
+        fi
+    else
+        [ -n "${GUP_CURRENT}" ] && echo "User: ${GUP_CURRENT}"
+        echo "Name: ${GUP_USER_NAME}"
+        echo "Mail: ${GUP_USER_EMAIL}"
+    fi
+    exit 0
+fi
+echo "Undefined GIT user profile."
+exit 1
