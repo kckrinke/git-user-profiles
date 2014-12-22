@@ -8,13 +8,12 @@
 # This script is intended to be sourced from ~/.bashrc as opposed
 # to being ran directly as a normal command.
 
+GUP_TMP_FILE="/tmp/gup-init.$$"
 ENABLE_ON_BASH_LOGIN=0
 [ -f /etc/default/git-user-profiles ] && source /etc/default/git-user-profiles
 if [ $ENABLE_ON_BASH_LOGIN -eq 1 ]
 then
-    GUP_TMP_FILE="/tmp/gup-init.$$"
     # If there is a global profiles directory, do yes; else, no.
-
     if [ -d "${GIT_USER_PROFILES_PATH}" ]
     then
         menu_list=""
@@ -43,9 +42,9 @@ then
         else
             echo "Git profile selection was aborted."
         fi
-        /bin/rm -f "${GUP_TMP_FILE}"
     fi
 fi
+/bin/rm -f "${GUP_TMP_FILE}"
 # Simple alias to re-source this profile in an existing session regardless if
 # it's enabled on bash login or not.
 alias git-user-profiles-select='source /etc/profile.d/git-user-profiles.sh'
