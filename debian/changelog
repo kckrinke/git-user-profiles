@@ -1,3 +1,25 @@
+git-user-profiles (1.0.2) unstable; urgency=medium
+
+  * switched architecture to all, added depends on git
+  * simplified some of the git wrapper logic, added more appropriate warnings
+  * Added more of a description, added depends on perl, libui-dialog-perl and libfile-slurp-perl.
+  * removed Data::Dumper and fixed the privilege check logic.
+  * adjusted debian copyright file
+  * took the description from the debian package and put it in the README placeholder
+  * Yet another copyright file tweak. Just GPL-2, not GPL-2+
+  * refactored dpkg-divert again
+  * fix debian package issue with upgrades
+  * helpful alias to re-select the git user profiles for existing sessions
+  * Debian version bump to: 1.0.1
+  * Adding a helper script to report the current profile.
+  * updated warning message in git wrapper script
+  * refactored GUP_TMP_FILE in /etc/profile.d/git-user-profiles.sh script
+  * /etc/profile.d/git-user-profiles.sh now exports a GUP_CURRENT variable to indicate the exact profile selected
+  * refined deb desc with notes about new features
+  * added git-user-profiles-whoami to the deb install
+
+ -- Kevin C. Krinke <kckrinke@knowroaming.com>  Mon, 22 Dec 2014 13:39:44 -0500
+
 git-user-profiles (1.0.1) unstable; urgency=medium
 
   * helpful alias to re-select the git user profiles for existing sessions
