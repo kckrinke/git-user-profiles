@@ -10,7 +10,7 @@ Homepage: https://github.com/kckrinke/git-user-profiles
 
 Package: git-user-profiles
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, git, perl, libui-dialog-perl, libfile-slurp-perl
+Depends: ${shlibs:Depends}, ${misc:Depends}, git, perl, libui-dialog-perl, libfile-slurp-perl, whiptail
 Description: Manage multiple GIT user profiles
  Helps to manage different GIT profiles on a per login
  session (terminal).
@@ -28,3 +28,11 @@ Description: Manage multiple GIT user profiles
  .
  The /etc/profile.d script is disabled by default. Edit
  the /etc/defaults/git-user-profiles file to enable.
+ .
+ You can also use the git-user-profiles-whoami script to
+ report your currently selected GIT user profile.
+ .
+ If you need to switch profiles without re-logging into
+ a shell; use the BASH alias provided:
+ git-user-profiles-select which will re-prompt and export
+ the environment accordingly.
