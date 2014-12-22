@@ -1,3 +1,4 @@
 src/bin/git usr/bin/
 src/bin/git-user-profiles-admin usr/bin/
+src/bin/git-user-profiles-whoami usr/bin/
 src/etc/profile.d/git-user-profiles.sh etc/profile.d/
