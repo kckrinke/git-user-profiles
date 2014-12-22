@@ -26,6 +26,7 @@ then
         then
             selected_profile=$(cat "${GUP_TMP_FILE}")
             echo "Selected GIT Profile: ${selected_profile}"
+            export GUP_CURRENT=""
             export GUP_USER_NAME=""
             export GUP_USER_EMAIL=""
             source "${GIT_USER_PROFILES_PATH}/${selected_profile}"
@@ -38,6 +39,8 @@ then
             if [ $GUP_ENV_EXISTS -eq 0 ]
             then
                 echo "Failed to source GIT User Profiles environment variables!" 1>&2
+            else
+                export GUP_CURRENT="${selected_profile}"
             fi
         else
             echo "Git profile selection was aborted."
