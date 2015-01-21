@@ -154,6 +154,23 @@ sub write_profile {
     write_file($profile_path,$content);
 }
 
+sub view_menu {
+    my $username = select_profile("Select a profile to view:");
+    if (defined $username) {
+        my $profile_path = $opt_profile_path.'/'.$username;
+        my $profile = read_profile($username);
+        my $info =
+         [ "Name", $profile->{GUP_USER_NAME},
+           "Email", $profile->{GUP_USER_EMAIL},
+           "SKey", $profile->{GUP_USER_SKEY}
+         ];
+        $DIALOG->menu
+         ( title=>"Profile: ".$username,
+           list=>$info
+         );
+    }
+}
+
 sub add_menu {
     my $username = do_input_check
      ( "Add Profile: User Name",
@@ -276,7 +293,8 @@ sub main_menu {
     my $response = $DIALOG->menu
      ( title => "Main Menu",
        list =>
-       [ "Add", "Create a new profile",
+       [ "View", "Display a profile",
+         "Add", "Create a new profile",
          "Edit", "Change an existing profile",
          "Rename", "Rename an existing profile",
          "Delete", "Remove existing profile",
@@ -284,6 +302,7 @@ sub main_menu {
        ]
      );
     if ($DIALOG->state() eq "OK") {
+        view_menu() if $response eq "View";
         add_menu() if $response eq "Add";
         edit_menu() if $response eq "Edit";
         rename_menu() if $response eq "Rename";
