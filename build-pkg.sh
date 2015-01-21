@@ -14,6 +14,7 @@ else
     git-dch --ignore-branch --full --spawn-editor=snapshot --git-author --release --since ${last_tag} --new-version ${next_ver}
     git commit -a -m "Debian version bump to: ${next_ver}"
     git tag "${next_tag}"
+    echo "Don't forget to \"git push origin --tags\""
 
 fi
 
