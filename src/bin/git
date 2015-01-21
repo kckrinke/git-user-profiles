@@ -17,6 +17,12 @@ then
         export GIT_AUTHOR_EMAIL="${GUP_USER_EMAIL}"
         export GIT_COMMITTER_NAME="${GUP_USER_NAME}"
         export GIT_COMMITTER_EMAIL="${GUP_USER_EMAIL}"
+        if [ -n "${GUP_USER_SKEY}" ]
+        then
+            ${GIT_REAL} config user.signingkey "${GUP_USER_SKEY}"
+        else
+            ${GIT_REAL} config user.signingkey ""
+        fi
         # Actually call out to the real git binary
         [ -n "$(which git.real)" ] && exec git.real "$@"
         # If we got this far, git.real doesn't exist :|

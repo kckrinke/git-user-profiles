@@ -14,20 +14,29 @@ do
     shift
 done
 
+function str_a () {
+    dst="$1"
+    src="$2"
+    [ -n "${dst}" ] && dst="${dst} ${src}"
+    [ -z "${dst}" ] && dst="${src}"
+    echo "${dst}"
+}
+
 if [ -n "${GUP_ENV_EXISTS}" ]
 then
     if [ $VERBOSE -eq 0 ]
     then
-        if [ -n "${GUP_CURRENT}" ]
-        then
-            echo "[${GUP_CURRENT}] ${GUP_USER_NAME} <${GUP_USER_EMAIL}>"
-        else
-            echo "${GUP_USER_NAME} <${GUP_USER_EMAIL}>"
-        fi
+        message=""
+        [ -n "${GUP_CURRENT}"    ] && message=$(str_a "${message}" "[${GUP_CURRENT}]")
+        [ -n "${GUP_USER_NAME}"  ] && message=$(str_a "${message}" "${GUP_USER_NAME}")
+        [ -n "${GUP_USER_EMAIL}" ] && message=$(str_a "${message}" "<${GUP_USER_EMAIL}>")
+        [ -n "${GUP_USER_SKEY}"  ] && message=$(str_a "${message}" "(${GUP_USER_SKEY})")
+        echo "${message}"
     else
-        [ -n "${GUP_CURRENT}" ] && echo "User: ${GUP_CURRENT}"
+        echo "User: ${GUP_CURRENT}"
         echo "Name: ${GUP_USER_NAME}"
         echo "Mail: ${GUP_USER_EMAIL}"
+        echo "SKey: ${GUP_USER_SKEY}"
     fi
     exit 0
 fi

@@ -29,6 +29,7 @@ then
             export GUP_CURRENT=""
             export GUP_USER_NAME=""
             export GUP_USER_EMAIL=""
+            export GUP_USER_SKEY=""
             source "${GIT_USER_PROFILES_PATH}/${selected_profile}"
             if [ -n "${GUP_USER_NAME}" -a -n "${GUP_USER_EMAIL}" ]
             then
