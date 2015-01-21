@@ -3,6 +3,14 @@
 ## Author: Kevin C. Krinke <kevin@krinke.ca>
 ## Copyright: GPLv2
 
+GIT_REAL="$(which git.real)"
+if [ -z "${GIT_REAL}" -o ! -x "${GIT_REAL}" ]
+then
+    echo "git-user-profiles: git.real is missing." 1>&2
+    # If we got this far, git.real doesn't exist :|
+    exit 254
+fi
+
 ENABLE_ON_BASH_LOGIN=0
 [ -f /etc/default/git-user-profiles ] && source /etc/default/git-user-profiles
 if [ $ENABLE_ON_BASH_LOGIN -eq 1 ]
@@ -24,10 +32,7 @@ then
             ${GIT_REAL} config user.signingkey ""
         fi
         # Actually call out to the real git binary
-        [ -n "$(which git.real)" ] && exec git.real "$@"
-        # If we got this far, git.real doesn't exist :|
-        echo "git-user-profiles: Missing git.real diversion." 1>&2
-        exit 254
+        exec ${GIT_REAL} "$@"
     fi
     echo "
 git-user-profiles: Profile environment is missing. Using existing GIT config.
@@ -39,4 +44,4 @@ git-user-profiles: prompt you to select a profile as if you had started a new
 git-user-profiles: BASH login session.
 " 1>&2
 fi
-exec git.real "$@"
+exec ${GIT_REAL} "$@"

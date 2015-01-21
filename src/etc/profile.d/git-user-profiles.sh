@@ -21,7 +21,7 @@ then
         do
             menu_list="${profile} '' ${menu_list}"
         done
-        whiptail --menu --noitem --clear "Select a GIT profile:" 20 40 10 ${menu_list} 2> "${GUP_TMP_FILE}"
+        whiptail --menu --noitem --clear "Select a GIT profile:" 12 40 5 ${menu_list} 2> "${GUP_TMP_FILE}"
         if [ $? -eq 0 ]
         then
             selected_profile=$(cat "${GUP_TMP_FILE}")

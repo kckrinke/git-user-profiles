@@ -60,7 +60,7 @@ sub do_input_check {
          );
         if ($DIALOG->state() eq "OK") {
             if (defined $regex) {
-                unless ($response =~ $regex) {
+                unless ($response =~ m/$regex/) {
                     $DIALOG->msgbox(text=>'"'.$response.'" did not match the pattern: "'.$regex.'".');
                     $default = $response;
                     $response = undef;
