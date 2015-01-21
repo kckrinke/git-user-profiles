@@ -9,6 +9,7 @@ use Getopt::Long;
 use Pod::Usage;
 use File::Basename;
 use File::Path;
+use File::Copy;
 
 my $opt_usage = false;
 my $opt_help = false;
@@ -208,6 +209,30 @@ sub del_menu {
     return false;
 }
 
+sub rename_menu {
+    my $old_name = select_profile("Select a profile to rename:");
+    if (defined $old_name) {
+        my $old_path = $opt_profile_path.'/'.$old_name;
+        my $new_name = $DIALOG->inputbox
+            ( text => "What would you like to rename \"${old_name}\" profile to?",
+              title => "Rename ${old_name}",
+              entry => "${old_name}"
+            );
+        if ($DIALOG->state() eq "OK") {
+            if ($old_name ne $new_name) {
+                my $new_path = $opt_profile_path.'/'.$new_name;
+                unless (move($old_path,$new_path)) {
+                    $DIALOG->msgbox
+                     ( "Error",
+                       "Failed to move \"$old_path\" to \"$new_path\": $!",
+                     );
+                }
+            }
+        }
+    }
+    return false;
+}
+
 sub edit_menu {
     my $username = select_profile("Select a profile to edit:");
     if (defined $username) {
@@ -253,6 +278,7 @@ sub main_menu {
        list =>
        [ "Add", "Create a new profile",
          "Edit", "Change an existing profile",
+         "Rename", "Rename an existing profile",
          "Delete", "Remove existing profile",
          "Quit", "Exit this program"
        ]
@@ -260,6 +286,7 @@ sub main_menu {
     if ($DIALOG->state() eq "OK") {
         add_menu() if $response eq "Add";
         edit_menu() if $response eq "Edit";
+        rename_menu() if $response eq "Rename";
         del_menu() if $response eq "Delete";
         return false if $response eq "Quit";
         return main_menu();
