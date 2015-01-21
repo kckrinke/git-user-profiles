@@ -27,9 +27,11 @@ then
         export GIT_COMMITTER_EMAIL="${GUP_USER_EMAIL}"
         if [ -n "${GUP_USER_SKEY}" ]
         then
-            ${GIT_REAL} config user.signingkey "${GUP_USER_SKEY}"
+            # set the user's signing key ID
+            ( ${GIT_REAL} config user.signingkey "${GUP_USER_SKEY}" 2>&1 ) > /dev/null
         else
-            ${GIT_REAL} config user.signingkey ""
+            # remove the signing key, we're overriding GIT user info already
+            ( ${GIT_REAL} config user.signingkey "" 2>&1 ) > /dev/null
         fi
         # Actually call out to the real git binary
         exec ${GIT_REAL} "$@"
