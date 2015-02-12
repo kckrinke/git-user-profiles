@@ -11,7 +11,7 @@
 GUP_TMP_FILE="/tmp/gup-init.$$"
 ENABLE_ON_BASH_LOGIN=0
 [ -f /etc/default/git-user-profiles ] && source /etc/default/git-user-profiles
-if [ $ENABLE_ON_BASH_LOGIN -eq 1 ]
+if [ $ENABLE_ON_BASH_LOGIN -eq 1 -a $EUID -ge 1000 -a "${USER}" != "git" ]
 then
     # If there is a global profiles directory, do yes; else, no.
     if [ -d "${GIT_USER_PROFILES_PATH}" ]
