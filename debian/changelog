@@ -1,3 +1,10 @@
+git-user-profiles (1.1.2) unstable; urgency=medium
+
+  * new version of build-pkg.sh script, has rudimentary --revert option
+  * do not enable profile on login if EUID < 1000 or if the username is 'git'.
+
+ -- Kevin C. Krinke <kckrinke@knowroaming.com>  Thu, 12 Feb 2015 16:21:01 -0500
+
 git-user-profiles (1.1.1) unstable; urgency=medium
 
   * ignore errors for overriding user.signingkey with git-user-profile info
